@@ -4,6 +4,7 @@ import MainLayout from '../layout/MainLayout'
 import HomePage from '../Pages/HomePage'
 import Rooms from '../Pages/Rooms'
 import SingleRoom from '../Pages/SingleRoom'
+import Register from '../Pages/Register'
 
 const Route = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const Route = createBrowserRouter([
           fetch(`http://localhost:5000/api/v1/get-rooms/${params.id}`),
       },
     ],
+  },
+  {
+    path: 'register',
+    element: <Register />,
   },
 ])
 
