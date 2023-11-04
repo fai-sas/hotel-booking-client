@@ -1,16 +1,45 @@
-import { Link } from 'react-router-dom'
-
-const handleLogin = (e) => {
-  e.preventDefault()
-  console.log('clicked')
-}
-
-const handleGoogleSignIn = (e) => {
-  e.preventDefault()
-  console.log('clicked')
-}
+/* eslint-disable no-unused-vars */
+import { useContext } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { AuthContext } from '../Providers/AuthProvider'
 
 const Login = () => {
+  const { signInUserWithEmail, signInWithGoogle } = useContext(AuthContext)
+  const navigate = useNavigate()
+
+  const handleLogin = (e) => {
+    e.preventDefault()
+    const email = e.target.email.value
+    const password = e.target.password.value
+
+    signInUserWithEmail(email, password)
+      .then((result) => {
+        toast.success(`Welcome ${result.user.displayName}`)
+
+        console.log(result.user)
+        e.target.reset()
+        navigate('/')
+      })
+      .catch((error) => {
+        toast.error('Invalid Login Details')
+        console.error(error)
+      })
+  }
+
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+      .then((result) => {
+        toast.success('Successfully Logged In')
+        console.log(result.user)
+        navigate('/')
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  }
+
   return (
     <main className='w-full max-w-md p-6 mx-auto'>
       <div className='bg-white border border-gray-200 shadow-sm mt-7 rounded-xl dark:bg-gray-800 dark:border-gray-700'>
