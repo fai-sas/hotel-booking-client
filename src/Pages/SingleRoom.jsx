@@ -5,20 +5,21 @@ import { Link, useLoaderData, useParams } from 'react-router-dom'
 import Swal from 'sweetalert2'
 
 const SingleRoom = () => {
-  const data = useLoaderData()
+  const roomData = useLoaderData()
 
   const {
+    _id,
     description,
     price_per_night,
     room_size,
     availability,
     images,
     special_offers,
-  } = data
-  console.log(description)
+  } = roomData
 
   return (
     <div>
+      <h1>{_id}</h1>
       <h1>{description}</h1>
       <h1>{price_per_night}</h1>
       <h1>{room_size}</h1>
@@ -30,13 +31,15 @@ const SingleRoom = () => {
             key={index}
             src={image}
             className='object-cover w-48 h-48'
-            alt={`Room ${name} Image`}
+            alt={`Room ${description} Image`}
           />
         ))}
       </div>
-      <button className='block p-2 mx-auto my-8 bg-green-400 rounded-xl'>
-        Book Now
-      </button>
+      <Link to={`/bookRoom/${_id}`}>
+        <button className='block p-2 mx-auto my-8 bg-green-400 rounded-xl'>
+          Book Now
+        </button>
+      </Link>
     </div>
   )
 }
