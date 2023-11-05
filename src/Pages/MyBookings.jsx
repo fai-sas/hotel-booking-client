@@ -30,9 +30,7 @@ const MyBookings = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await axios.delete(
-            `http://localhost:5000/api/v1/delete-booking/${id}`
-          )
+          const response = await axiosSecure.delete(`/delete-booking/${id}`)
 
           if (response.data.deletedCount > 0) {
             Swal.fire('Your Booking Has Been Cancelled.', 'success')

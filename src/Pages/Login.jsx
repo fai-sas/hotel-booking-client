@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useContext } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { AuthContext } from '../Providers/AuthProvider'
@@ -8,6 +8,7 @@ import { AuthContext } from '../Providers/AuthProvider'
 const Login = () => {
   const { signInUserWithEmail, signInWithGoogle } = useContext(AuthContext)
   const navigate = useNavigate()
+  const location = useLocation()
 
   const handleLogin = (e) => {
     e.preventDefault()
@@ -20,7 +21,7 @@ const Login = () => {
 
         console.log(result.user)
         e.target.reset()
-        navigate('/')
+        navigate(location?.state ? location?.state : '/')
       })
       .catch((error) => {
         toast.error('Invalid Login Details')
