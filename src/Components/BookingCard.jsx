@@ -7,6 +7,7 @@ const BookingCard = ({ booking, handleDelete }) => {
   const {
     _id,
     description,
+    date,
     price_per_night,
     room_size,
     availability,
@@ -19,6 +20,7 @@ const BookingCard = ({ booking, handleDelete }) => {
       <div className='p-4 border rounded-lg shadow-md'>
         <h3 className='text-2xl font-bold'>{name}</h3>
         <p className='text-gray-600'>{description}</p>
+        <p className='text-gray-600'>{date}</p>
         <p className='text-2xl font-bold'>
           Price: ${price_per_night} per night
         </p>
@@ -29,12 +31,11 @@ const BookingCard = ({ booking, handleDelete }) => {
           ))}
         </div> */}
       </div>{' '}
-      <button className='block p-2 mx-auto my-8 text-white bg-gray-800 rounded-xl'>
-        Confirm
-      </button>
-      <button className='block p-2 mx-auto my-8 bg-green-400 rounded-xl'>
-        Update
-      </button>
+      <Link to={`/updateBooking/${_id}`}>
+        <button className='block p-2 mx-auto my-8 bg-green-400 rounded-xl'>
+          Update
+        </button>
+      </Link>
       <button
         onClick={() => handleDelete(_id)}
         className='block p-2 mx-auto my-8 bg-red-400 rounded-xl'

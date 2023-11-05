@@ -9,13 +9,11 @@ import Swal from 'sweetalert2'
 const MyBookings = () => {
   const { user } = useAuth()
   const [bookings, setBookings] = useState([])
-  const url = `http://localhost:5000/api/v1/get-booking?email=${user?.email}`
+  const url = `http://localhost:5000/api/v1/bookings?email=${user?.email}`
 
   useEffect(() => {
     axios.get(url).then((res) => setBookings(res.data))
   }, [url])
-
-  console.log(bookings)
 
   const handleDelete = async (id) => {
     Swal.fire({
@@ -43,25 +41,6 @@ const MyBookings = () => {
       }
     })
   }
-
-  // const handleDelete = (id) => {
-  //   const proceed = confirm('Are You sure you want to delete')
-  //   if (proceed) {
-  //     fetch(`http://localhost:5000/api/v1/delete-booking/${id}`, {
-  //       method: 'DELETE',
-  //     })
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         console.log(data)
-  //         if (data.deletedCount > 0) {
-  //           alert('deleted successful')
-
-  //           const remaining = bookings.filter((booking) => booking._id !== id)
-  //           setBookings(remaining)
-  //         }
-  //       })
-  //   }
-  // }
 
   return (
     <div>

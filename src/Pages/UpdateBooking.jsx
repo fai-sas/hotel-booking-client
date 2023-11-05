@@ -1,68 +1,84 @@
 /* eslint-disable no-unused-vars */
-import { Link, useLoaderData } from 'react-router-dom'
+import axios from 'axios'
+import { useLoaderData } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import useAuth from '../Hooks/useAuth'
-import { toast } from 'react-toastify'
 
-const BookRoom = () => {
+const UpdateBooking = () => {
   const { user } = useAuth()
-  const roomData = useLoaderData()
+  const booking = useLoaderData()
+  console.log(booking)
 
   const {
     _id,
     name,
     description,
+    date,
     price_per_night,
     room_size,
     availability,
     images,
     special_offers,
-  } = roomData
+  } = booking
 
-  const handleBookService = (e) => {
+  const handleUpdateBooking = async (e) => {
     e.preventDefault()
     const form = e.target
-    const name = form.name.value
+
     const date = form.date.value
-    const email = user?.email
 
-    const booking = {
-      customerName: name,
-      email,
-      images,
+    const updatedBooking = {
       date,
-      room: name,
-      room_id: _id,
-      price: price_per_night,
-      description,
-      room_size,
     }
+    console.log(updatedBooking)
 
-    console.log(booking)
-
-    fetch(
-      'http://localhost:5000/api/v1/bookings',
-
-      {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify(booking),
+    try {
+      const response = await axios.patch(
+        `http://localhost:5000/api/v1/bookings/${_id}`,
+        updatedBooking
+      )
+      console.log(response.data)
+      if (response.data.modifiedCount) {
+        Swal.fire({
+          title: 'Success!',
+          text: 'Booking Updated Successfully',
+          icon: 'success',
+          confirmButtonText: 'Cool',
+        })
       }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data)
-        if (data.insertedId) {
-          toast.success('Successfully Booked')
-        }
-      })
+    } catch (error) {
+      console.error(error)
+    }
   }
+
+  // const handleUpdateBooking = (id) => {
+  //   fetch(`http://localhost:5000/api/v1/bookings/${id}`, {
+  //     method: 'PATCH',
+  //     headers: {
+  //       'content-type': 'application/json',
+  //     },
+  //     body: JSON.stringify({ status: 'confirm' }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data)
+  //       if (data.modifiedCount > 0) {
+  //         // update state
+  //         Swal.fire({
+  //           title: 'Success!',
+  //           text: 'Booking Updated Successfully',
+  //           icon: 'success',
+  //           confirmButtonText: 'Cool',
+  //         })
+  //       }
+  //     })
+  // }
 
   return (
     <>
-      <h1 className='text-3xl text-center'>Book Service: {name} </h1>
-      <form onSubmit={handleBookService}>
+      <h1 className='text-3xl text-center'>Update Booking: {description} </h1>
+      <form onSubmit={handleUpdateBooking}>
+        {/* <form> */}
         <div className='mt-6 space-y-2'>
           <div>
             <label htmlFor='name'>Name</label>
@@ -85,7 +101,8 @@ const BookRoom = () => {
               className='block w-full px-5 py-3 text-base placeholder-gray-800 transition duration-500 ease-in-out transform border border-transparent rounded-lg text-neutral-600 bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300'
             />
           </div>
-          <div>
+
+          {/* <div>
             <label htmlFor='price'>Price</label>
             <input
               type='number'
@@ -93,16 +110,16 @@ const BookRoom = () => {
               id='price'
               defaultValue={price_per_night}
               className='block w-full px-5 py-3 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg text-neutral-600 bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300'
-              placeholder='Enter your email'
+              placeholder='price'
             />
-          </div>
+          </div> */}
           <div>
             <label htmlFor='Date'>Date</label>
             <input
               type='date'
               name='date'
               id='date'
-              defaultValue={price_per_night}
+              defaultValue={date}
               className='block w-full px-5 py-3 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg text-neutral-600 bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300'
             />
           </div>
@@ -111,7 +128,7 @@ const BookRoom = () => {
               type='submit'
               className='flex items-center justify-center w-full px-10 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-blue-600 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
             >
-              Book Now
+              Update Booking
             </button>
           </div>
         </div>
@@ -119,4 +136,4 @@ const BookRoom = () => {
     </>
   )
 }
-export default BookRoom
+export default UpdateBooking
