@@ -10,6 +10,7 @@ import Bookings from '../Pages/Bookings'
 import BookRoom from '../Pages/BookRoom'
 import MyBookings from '../Pages/MyBookings'
 import UpdateBooking from '../Pages/UpdateBooking'
+import PrivateRoute from './PrivateRoute'
 
 const Route = createBrowserRouter([
   {
@@ -32,21 +33,38 @@ const Route = createBrowserRouter([
       },
       {
         path: 'bookings',
-        element: <Bookings />,
+        element: (
+          <PrivateRoute>
+            {' '}
+            <Bookings />
+          </PrivateRoute>
+        ),
       },
       {
         path: 'bookRoom/:id',
-        element: <BookRoom />,
+        element: (
+          <PrivateRoute>
+            <BookRoom />
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/api/v1/get-rooms/${params.id}`),
       },
       {
         path: 'userBookings',
-        element: <MyBookings />,
+        element: (
+          <PrivateRoute>
+            <MyBookings />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/updateBooking/:id',
-        element: <UpdateBooking />,
+        element: (
+          <PrivateRoute>
+            <UpdateBooking />
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/api/v1/bookings/${params.id}`),
       },

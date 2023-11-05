@@ -5,15 +5,19 @@ import useAuth from '../Hooks/useAuth'
 import { useEffect, useState } from 'react'
 import BookingCard from '../Components/BookingCard'
 import Swal from 'sweetalert2'
+import useAxiosSecure from '../Hooks/useAxiosSecure'
 
 const MyBookings = () => {
   const { user } = useAuth()
   const [bookings, setBookings] = useState([])
-  const url = `http://localhost:5000/api/v1/bookings?email=${user?.email}`
+  const axiosSecure = useAxiosSecure()
+
+  // const url = `http://localhost:5000/api/v1/bookings?email=${user?.email}`
+  const url = `/bookings?email=${user?.email}`
 
   useEffect(() => {
-    axios.get(url).then((res) => setBookings(res.data))
-  }, [url])
+    axiosSecure.get(url).then((res) => setBookings(res.data))
+  }, [url, axiosSecure])
 
   const handleDelete = async (id) => {
     Swal.fire({

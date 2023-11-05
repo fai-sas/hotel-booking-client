@@ -3,11 +3,12 @@ import axios from 'axios'
 import { useLoaderData } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import useAuth from '../Hooks/useAuth'
+import useAxiosSecure from '../Hooks/useAxiosSecure'
 
 const UpdateBooking = () => {
   const { user } = useAuth()
   const booking = useLoaderData()
-  console.log(booking)
+  const axiosSecure = useAxiosSecure()
 
   const {
     _id,
@@ -33,8 +34,8 @@ const UpdateBooking = () => {
     console.log(updatedBooking)
 
     try {
-      const response = await axios.patch(
-        `http://localhost:5000/api/v1/bookings/${_id}`,
+      const response = await axiosSecure.patch(
+        `/bookings/${_id}`,
         updatedBooking
       )
       console.log(response.data)
