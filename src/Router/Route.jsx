@@ -8,6 +8,7 @@ import Register from '../Pages/Register'
 import Login from '../Pages/Login'
 import Bookings from '../Pages/Bookings'
 import BookRoom from '../Pages/BookRoom'
+import MyBookings from '../Pages/MyBookings'
 
 const Route = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const Route = createBrowserRouter([
         element: <BookRoom />,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/api/v1/get-rooms/${params.id}`),
+      },
+      {
+        path: 'userBookings',
+        element: <MyBookings />,
       },
     ],
   },

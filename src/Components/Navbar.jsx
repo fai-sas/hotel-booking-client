@@ -35,9 +35,9 @@ const Navbar = () => {
   }
 
   return (
-    <header className='z-50   flex flex-wrap container mx-auto py-3 text-sm bg-white border-b border-gray-200 sm:justify-start sm:flex-nowrap sm:py-0 dark:bg-gray-800 dark:border-gray-700'>
+    <header className='container z-50 flex flex-wrap py-3 mx-auto text-sm bg-white border-b border-gray-200 sm:justify-start sm:flex-nowrap sm:py-0 dark:bg-gray-800 dark:border-gray-700'>
       <nav
-        className='relative w-full px-4 mx-auto  sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8'
+        className='relative w-full px-4 mx-auto sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8'
         aria-label='Global'
       >
         <div className='flex items-center justify-between gap-4'>
@@ -88,25 +88,25 @@ const Navbar = () => {
           <div className='flex flex-col mt-5 gap-y-4 gap-x-0 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:pl-7'>
             <NavLink
               to='/'
-              className='font-medium  sm:py-6 dark:text-blue-500'
+              className='font-medium sm:py-6 dark:text-blue-500'
               href='#'
               aria-current='page'
             >
               Home
             </NavLink>
             <NavLink
-              to='addproduct'
+              to='rooms'
               className='font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500'
               href='#'
             >
-              Add Product
+              Rooms
             </NavLink>
             <NavLink
-              to='mycart'
+              to='userBookings'
               className='font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500'
               href='#'
             >
-              My Cart
+              My Bookings
             </NavLink>
 
             {user && (

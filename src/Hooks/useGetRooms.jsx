@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 
 const useGetRooms = () => {
   const { data, isLoading, isFetching, refetch } = useQuery({
-    queryKey: ['getRooms'],
+    queryKey: ['getBookings'],
     queryFn: async () => {
       const data = await fetch('http://localhost:5000/api/v1/get-rooms')
       return await data.json()
@@ -11,4 +11,5 @@ const useGetRooms = () => {
   })
   return { data, isLoading, isFetching, refetch }
 }
+
 export default useGetRooms
