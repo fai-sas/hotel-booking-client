@@ -45,17 +45,22 @@ const MyBookings = () => {
   }
 
   return (
-    <div>
-      <h1>Please find your booking list</h1>
-      {bookings.map((booking) => {
-        return (
-          <BookingCard
-            key={booking._id}
-            booking={booking}
-            handleDelete={handleDelete}
-          />
-        )
-      })}
+    <div className='container p-8 mx-auto'>
+      <h1 className='my-8 text-2xl font-black text-transparent lg:text-5xl bg-clip-text bg-gradient-to-r from-indigo-500 to-teal-500'>
+        Find your list of bookings here
+      </h1>
+
+      <article className='grid grid-cols-3 gap-8 lg:'>
+        {bookings.map((booking) => {
+          return (
+            <BookingCard
+              key={booking._id}
+              booking={booking}
+              handleDelete={handleDelete}
+            />
+          )
+        })}
+      </article>
     </div>
   )
 }
