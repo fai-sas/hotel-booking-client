@@ -16,9 +16,17 @@ const Banner = () => {
         ></video>
       </div>
       <div className='z-10 space-y-2 video-content'>
-        <h1 className='pb-4 font-light lg:text-6xl'>Welcome to our Hotel</h1>
+        <h1 className='pb-8 font-light lg:text-6xl'>
+          Your Dream Getaway Awaits
+        </h1>
+        <h1 className='pb-4 font-light leading-normal lg:text-4xl'>
+          Discover and Reserve the Perfect Hotel <br />
+          for Your Next Adventure
+        </h1>
         <Link to='/rooms'>
-          <button>Book Now</button>
+          <button className='self-center px-4 py-2 m-2 text-2xl text-center text-white bg-indigo-500 rounded-tl-full rounded-br-full text-md'>
+            Book Now
+          </button>
         </Link>
       </div>
     </section>

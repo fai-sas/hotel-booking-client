@@ -18,21 +18,21 @@ const Route = createBrowserRouter([
     element: <MainLayout />,
     children: [
       {
-        index: true,
+        path: '/',
         element: <HomePage />,
       },
       {
-        path: 'rooms',
+        path: '/rooms',
         element: <Rooms />,
       },
       {
-        path: 'singleRoom/:id',
+        path: '/singleRoom/:id',
         element: <SingleRoom />,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/api/v1/get-rooms/${params.id}`),
       },
       {
-        path: 'bookings',
+        path: '/bookings',
         element: (
           <PrivateRoute>
             {' '}
@@ -41,7 +41,7 @@ const Route = createBrowserRouter([
         ),
       },
       {
-        path: 'bookRoom/:id',
+        path: '/bookRoom/:id',
         element: (
           <PrivateRoute>
             <BookRoom />
@@ -51,7 +51,7 @@ const Route = createBrowserRouter([
           fetch(`http://localhost:5000/api/v1/get-rooms/${params.id}`),
       },
       {
-        path: 'userBookings',
+        path: '/userBookings',
         element: (
           <PrivateRoute>
             <MyBookings />
@@ -71,11 +71,11 @@ const Route = createBrowserRouter([
     ],
   },
   {
-    path: 'register',
+    path: '/register',
     element: <Register />,
   },
   {
-    path: 'login',
+    path: '/login',
     element: <Login />,
   },
 ])

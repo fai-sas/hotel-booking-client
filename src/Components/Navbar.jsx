@@ -195,7 +195,6 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      <ToastContainer />
     </header>
   )
 }
