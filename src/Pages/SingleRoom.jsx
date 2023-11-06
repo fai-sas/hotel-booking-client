@@ -105,6 +105,8 @@ const SingleRoom = () => {
             {/*  */}
           </div>
         </div>
+
+        {/* reviews */}
       </article>
     </section>
   )

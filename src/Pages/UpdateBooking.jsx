@@ -12,6 +12,7 @@ const UpdateBooking = () => {
 
   const {
     _id,
+    id,
     name,
     description,
     date,
