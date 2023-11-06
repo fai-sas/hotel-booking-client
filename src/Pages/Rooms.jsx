@@ -35,19 +35,22 @@ const Rooms = () => {
   }
 
   return (
-    <div className='mt-4'>
-      <div className='text-center'>
-        <h3 className='text-2xl font-bold text-orange-600'>Our Services</h3>
-        <h2 className='text-5xl'>Our Service Area</h2>
-        <p>
-          the majority have suffered alteration in some form, by injected
-          humour, or random <br /> words which do not look even slightly
-          believable.{' '}
+    <div className='container py-8 mx-auto '>
+      <div className='mx-auto text-center lg:max-w-4xl'>
+        <h2 className='py-4 text-3xl font-bold leading-normal'>
+          Select from a range of thoughtfully designed rooms and <br /> suites
+          that cater to every travelers preferences.
+        </h2>
+        <p className='leading-relaxed'>
+          Whether you are seeking a cozy retreat, a spacious family suite, or a
+          luxurious haven, our hotel has the perfect space for you. Each room is
+          elegantly furnished, well-equipped, and designed to provide you with
+          comfort and convenience during your stay. Explore our available room
+          options and find the perfect match for your next getaway.
         </p>
-        <p>{rooms.length}</p>
       </div>
 
-      <div>
+      <div className='px-8 py-4'>
         <label htmlFor=''>Price</label>
         <select onChange={(e) => console.log(e.target.value)}>
           <option value='asc'>From Low to High</option>
@@ -55,7 +58,8 @@ const Rooms = () => {
         </select>
       </div>
 
-      <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
+      {/* <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'> */}
+      <div className='grid gap-4 p-8 lg:grid-cols-3'>
         {rooms.map((rooms) => (
           <RoomsCard key={rooms._id} rooms={rooms}></RoomsCard>
         ))}
