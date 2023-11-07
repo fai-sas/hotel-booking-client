@@ -55,17 +55,23 @@ const MyBookings = () => {
         Find your list of bookings here
       </h1>
 
-      <article className='grid grid-cols-3 gap-8 lg:'>
-        {bookings.map((booking) => {
-          return (
-            <BookingCard
-              key={booking._id}
-              booking={booking}
-              handleDelete={handleDelete}
-            />
-          )
-        })}
-      </article>
+      {bookings.length === 0 ? (
+        <p className='py-16 text-3xl font-bold text-center'>
+          No bookings found.
+        </p>
+      ) : (
+        <article className='grid grid-cols-3 gap-8 lg:'>
+          {bookings.map((booking) => {
+            return (
+              <BookingCard
+                key={booking._id}
+                booking={booking}
+                handleDelete={handleDelete}
+              />
+            )
+          })}
+        </article>
+      )}
     </div>
   )
 }

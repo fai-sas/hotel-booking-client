@@ -9,6 +9,7 @@ import Login from '../Pages/Login'
 import Bookings from '../Pages/Bookings'
 import BookRoom from '../Pages/BookRoom'
 import MyBookings from '../Pages/MyBookings'
+import ErrorPage from '../Pages/ErrorPage'
 import UpdateBooking from '../Pages/UpdateBooking'
 import PrivateRoute from './PrivateRoute'
 
@@ -16,6 +17,7 @@ const Route = createBrowserRouter([
   {
     path: '/',
     element: <MainLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: '/',
