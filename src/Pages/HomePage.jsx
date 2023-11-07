@@ -1,4 +1,5 @@
 import Banner from '../Components/Banner'
+import FeaturedRooms from '../Components/FeaturedRooms'
 import Gallery from '../Components/Gallery'
 import Map from '../Components/Map'
 import Newsletter from '../Components/Newsletter'
@@ -9,6 +10,7 @@ const HomePage = () => {
     <>
       <Banner />
       <Gallery />
+      <FeaturedRooms />
       <Testimonial />
       <Map />
       <Newsletter />

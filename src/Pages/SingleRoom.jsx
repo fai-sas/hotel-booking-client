@@ -168,7 +168,7 @@ const SingleRoom = () => {
       )}
       {/* end of review */}
 
-      <CommentBox />
+      <CommentBox roomId={_id} />
     </section>
   )
 }

@@ -23,6 +23,14 @@ const BookRoom = () => {
     special_offers,
   } = roomData
 
+  function getCurrentDate() {
+    const now = new Date()
+    const year = now.getFullYear()
+    const month = (now.getMonth() + 1).toString().padStart(2, '0')
+    const day = now.getDate().toString().padStart(2, '0')
+    return `${year}-${month}-${day}`
+  }
+
   const handleBookService = async (e) => {
     e.preventDefault()
 
@@ -134,6 +142,7 @@ const BookRoom = () => {
                 id='date'
                 required
                 defaultValue={price_per_night}
+                min={getCurrentDate()}
                 className='block w-full px-5 py-3 my-2 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg text-neutral-600 bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300'
               />
             </div>

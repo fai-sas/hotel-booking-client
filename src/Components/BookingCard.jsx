@@ -35,7 +35,7 @@ const BookingCard = ({ booking, handleDelete }) => {
         </div>
 
         <div className='relative'>
-          <Link to={`/singleRoom/${_id}`}>
+          <Link>
             <img
               className='w-full'
               src={images1}
