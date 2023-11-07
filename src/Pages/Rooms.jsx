@@ -7,31 +7,25 @@ import axios from 'axios'
 
 const Rooms = () => {
   const { data: rooms, isLoading } = useGetRooms()
+  const [priceFilter, setPriceFilter] = useState('')
 
-  // const [price, setPrice] = useState('')
+  const handlePriceFilterChange = (e) => {
+    setPriceFilter(e.target.value)
+  }
 
-  // const getRooms = async () => {
-  //   axios.get(
-  //     `http://localhost:5000/api/v1/get-rooms?sortField=price&sortOrder=${price}`
-  //   )
-  // }
-
-  // const {
-  //   data: rooms,
-  //   isLoading,
-  //   isFetching,
-  //   refetch,
-  // } = useQuery({
-  //   queryKey: ['getRooms'],
-  //   queryFn: getRooms,
-  // })
-
-  if (isLoading) {
+  if (isLoading || rooms === null) {
     return (
       <h1 className='container p-8 mx-auto text-4xl font-bold text-center'>
         Loading
       </h1>
     )
+  }
+
+  let filteredRooms = [...rooms]
+  if (priceFilter === 'asc') {
+    filteredRooms.sort((a, b) => a.price_per_night - b.price_per_night)
+  } else if (priceFilter === 'desc') {
+    filteredRooms.sort((a, b) => b.price_per_night - a.price_per_night)
   }
 
   return (
@@ -49,18 +43,18 @@ const Rooms = () => {
           options and find the perfect match for your next getaway.
         </p>
       </div>
-
       <div className='px-8 py-4'>
-        <label htmlFor=''>Price</label>
-        <select onChange={(e) => console.log(e.target.value)}>
+        <label className='mr-4' htmlFor=''>
+          Sort by Price
+        </label>
+        <select onChange={handlePriceFilterChange}>
           <option value='asc'>From Low to High</option>
           <option value='desc'>From High to Low</option>
         </select>
       </div>
 
-      {/* <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'> */}
       <div className='grid grid-cols-1 gap-4 p-8 lg:grid-cols-3'>
-        {rooms.map((rooms) => (
+        {filteredRooms?.map((rooms) => (
           <RoomsCard key={rooms._id} rooms={rooms}></RoomsCard>
         ))}
       </div>
