@@ -12,7 +12,7 @@ const Rooms = () => {
 
   // const getRooms = async () => {
   //   axios.get(
-  //     `http://localhost:5000/api/v1/get-rooms?sortField=price&sortOrder=${price}`
+  //     `https://hotel-booking-server-rho.vercel.app/api/v1/get-rooms?sortField=price&sortOrder=${price}`
   //   )
   // }
 
@@ -35,7 +35,7 @@ const Rooms = () => {
   }
 
   return (
-    <div className='container py-8 mx-auto '>
+    <div className='container p-8 mx-auto '>
       <div className='mx-auto text-center lg:max-w-4xl'>
         <h2 className='py-4 text-3xl font-bold leading-normal'>
           Select from a range of thoughtfully designed rooms and <br /> suites
@@ -59,7 +59,7 @@ const Rooms = () => {
       </div>
 
       {/* <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'> */}
-      <div className='grid gap-4 p-8 lg:grid-cols-3'>
+      <div className='grid grid-cols-1 gap-4 p-8 lg:grid-cols-3'>
         {rooms.map((rooms) => (
           <RoomsCard key={rooms._id} rooms={rooms}></RoomsCard>
         ))}

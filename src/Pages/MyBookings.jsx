@@ -9,11 +9,16 @@ import useAxiosSecure from '../Hooks/useAxiosSecure'
 
 const MyBookings = () => {
   const { user } = useAuth()
+  console.log(user)
   const [bookings, setBookings] = useState([])
   const axiosSecure = useAxiosSecure()
 
-  // const url = `http://localhost:5000/api/v1/bookings?email=${user?.email}`
+  // const url = `https://hotel-booking-server-rho.vercel.app/api/v1/bookings?email=${user?.email}`
   const url = `/bookings?email=${user?.email}`
+
+  // useEffect(() => {
+  //   axiosSecure.get(url).then((res) => setBookings(res?.data))
+  // }, [url, axiosSecure])
 
   useEffect(() => {
     axiosSecure.get(url).then((res) => setBookings(res.data))

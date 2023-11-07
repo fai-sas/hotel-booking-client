@@ -54,7 +54,7 @@ const UpdateBooking = () => {
   }
 
   // const handleUpdateBooking = (id) => {
-  //   fetch(`http://localhost:5000/api/v1/bookings/${id}`, {
+  //   fetch(`https://hotel-booking-server-rho.vercel.app/api/v1/bookings/${id}`, {
   //     method: 'PATCH',
   //     headers: {
   //       'content-type': 'application/json',

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import {
   GoogleAuthProvider,
@@ -10,6 +11,7 @@ import {
 import { createContext, useEffect, useState } from 'react'
 import auth from '../Firebase/firebase.config'
 import axios from 'axios'
+// import useAxiosSecure from '../Hooks/useAxiosSecure'
 
 export const AuthContext = createContext(null)
 
@@ -19,6 +21,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
   const [showPassword, setShowPassword] = useState(false)
+  // const axiosSecure = useAxiosSecure()
 
   const handlePassword = () => {
     setShowPassword(!showPassword)
@@ -53,27 +56,33 @@ const AuthProvider = ({ children }) => {
       setLoading(false)
       // if user exists then issue a token
       if (currentUser) {
-        axios
-          .post('http://localhost:5000/api/v1/jwt', loggedUser, {
+        axios.post(
+          'https://hotel-booking-server-rho.vercel.app/api/v1/jwt',
+          loggedUser,
+          {
             withCredentials: true,
-          })
-          .then((res) => {
-            console.log('token response', res.data)
-          })
+          }
+        )
+        // axiosSecure.post('/jwt', loggedUser).then((res) => {
+        //   console.log('token response', res.data)
+        // })
       } else {
-        axios
-          .post('http://localhost:5000/api/v1/logout', loggedUser, {
+        axios.post(
+          'https://hotel-booking-server-rho.vercel.app/api/v1/logout',
+          loggedUser,
+          {
             withCredentials: true,
-          })
-          .then((res) => {
-            console.log(res.data)
-          })
+          }
+        )
+        // axiosSecure.post('/logout', loggedUser).then((res) => {
+        //   console.log(res.data)
+        // })
       }
     })
     return () => {
       return unsubscribe()
     }
-  }, [])
+  }, [user?.email])
 
   const authInfo = {
     user,

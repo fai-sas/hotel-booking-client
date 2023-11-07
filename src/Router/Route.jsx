@@ -29,7 +29,9 @@ const Route = createBrowserRouter([
         path: '/singleRoom/:id',
         element: <SingleRoom />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/api/v1/get-rooms/${params.id}`),
+          fetch(
+            `https://hotel-booking-server-rho.vercel.app/api/v1/get-rooms/${params.id}`
+          ),
       },
       {
         path: '/bookings',
@@ -48,7 +50,9 @@ const Route = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/api/v1/get-rooms/${params.id}`),
+          fetch(
+            `https://hotel-booking-server-rho.vercel.app/api/v1/get-rooms/${params.id}`
+          ),
       },
       {
         path: '/userBookings',
@@ -66,7 +70,9 @@ const Route = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/api/v1/bookings/${params.id}`),
+          fetch(
+            `https://hotel-booking-server-rho.vercel.app/api/v1/bookings/${params.id}`
+          ),
       },
     ],
   },
