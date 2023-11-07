@@ -13,7 +13,7 @@ const MyBookings = () => {
   const [bookings, setBookings] = useState([])
   const axiosSecure = useAxiosSecure()
 
-  // const url = `https://hotel-booking-server-rho.vercel.app/api/v1/bookings?email=${user?.email}`
+  // const url = `http://localhost:5000/api/v1/bookings?email=${user?.email}`
   const url = `/bookings?email=${user?.email}`
 
   // useEffect(() => {

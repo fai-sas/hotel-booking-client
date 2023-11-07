@@ -5,9 +5,7 @@ const useGetRooms = () => {
   const { data, isLoading, isFetching, refetch } = useQuery({
     queryKey: ['getBookings'],
     queryFn: async () => {
-      const data = await fetch(
-        `https://hotel-booking-server-rho.vercel.app/api/v1/get-rooms`
-      )
+      const data = await fetch(`http://localhost:5000/api/v1/get-rooms`)
       return await data.json()
     },
   })

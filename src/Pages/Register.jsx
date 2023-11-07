@@ -37,16 +37,13 @@ const Register = () => {
         const createdAt = result.user?.metadata?.creationTime
         const user = { email, displayName: name, createdAt: createdAt }
 
-        fetch(
-          'https://hotel-booking-server-rho.vercel.app/api/v1/create-user',
-          {
-            method: 'POST',
-            headers: {
-              'content-type': 'application/json',
-            },
-            body: JSON.stringify(user),
-          }
-        ).then((data) => {
+        fetch('http://localhost:5000/api/v1/create-user', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify(user),
+        }).then((data) => {
           if (data.insertedId) {
             console.log('user added to the database')
           }

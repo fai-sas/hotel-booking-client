@@ -12,7 +12,7 @@ const Rooms = () => {
 
   // const getRooms = async () => {
   //   axios.get(
-  //     `https://hotel-booking-server-rho.vercel.app/api/v1/get-rooms?sortField=price&sortOrder=${price}`
+  //     `http://localhost:5000/api/v1/get-rooms?sortField=price&sortOrder=${price}`
   //   )
   // }
 

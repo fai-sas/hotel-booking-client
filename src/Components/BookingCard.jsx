@@ -35,13 +35,13 @@ const BookingCard = ({ booking, handleDelete }) => {
         </div>
 
         <div className='relative'>
-          <a href='#'>
+          <Link to={`/singleRoom/${_id}`}>
             <img
               className='w-full'
               src={images1}
               alt='Sunset in the mountains'
             />
-          </a>
+          </Link>
           <Link
             to={`/updateBooking/${_id}`}
             className='absolute bottom-0 left-0 z-10 items-center hidden px-6 py-2 m-2 text-xs text-white transition duration-500 ease-in-out bg-indigo-600 hover:bg-white hover:text-indigo-600 sm:flex'

@@ -3,6 +3,7 @@ import { Link, useLoaderData } from 'react-router-dom'
 import useAuth from '../Hooks/useAuth'
 import { toast } from 'react-toastify'
 import axios from 'axios'
+import { useEffect, useState } from 'react'
 
 const BookRoom = () => {
   const { user } = useAuth()
@@ -22,8 +23,9 @@ const BookRoom = () => {
     special_offers,
   } = roomData
 
-  const handleBookService = (e) => {
+  const handleBookService = async (e) => {
     e.preventDefault()
+
     const form = e.target
     const name = form.name.value
     const date = form.date.value
@@ -46,7 +48,7 @@ const BookRoom = () => {
     console.log(booking)
 
     fetch(
-      'https://hotel-booking-server-rho.vercel.app/api/v1/bookings',
+      'http://localhost:5000/api/v1/bookings',
 
       {
         method: 'POST',
@@ -57,13 +59,18 @@ const BookRoom = () => {
       }
     )
       // axios
-      //   .post('https://hotel-booking-server-rho.vercel.app/api/v1/bookings, bookings')
+      //   .post('http://localhost:5000/api/v1/bookings, bookings')
       .then((res) => res.json())
       .then((data) => {
         console.log(data)
         if (data.insertedId) {
           toast.success('Successfully Booked')
+        } else {
+          toast.error(data.message)
         }
+      })
+      .catch((error) => {
+        toast.error('Error during booking:', error)
       })
   }
 
