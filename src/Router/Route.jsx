@@ -13,6 +13,7 @@ import UpdateBooking from '../Pages/UpdateBooking'
 import PrivateRoute from './PrivateRoute'
 import Bookings from '../Pages/Bookings'
 import Contact from '../Pages/Contact'
+import Pricing from '../Pages/Pricing'
 
 const Route = createBrowserRouter([
   {
@@ -80,6 +81,10 @@ const Route = createBrowserRouter([
       {
         path: '/contact',
         element: <Contact />,
+      },
+      {
+        path: '/pricing',
+        element: <Pricing />,
       },
     ],
   },

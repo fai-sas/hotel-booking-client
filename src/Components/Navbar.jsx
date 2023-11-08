@@ -124,6 +124,14 @@ const Navbar = () => {
               Contact Us
             </NavLink>
 
+            <NavLink
+              to='pricing'
+              className='font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500'
+              href='#'
+            >
+              Pricing
+            </NavLink>
+
             {user && (
               <>
                 <Link className='font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500'>
