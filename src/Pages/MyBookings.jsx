@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import BookingCard from '../Components/BookingCard'
 import Swal from 'sweetalert2'
 import useAxiosSecure from '../Hooks/useAxiosSecure'
+import { Helmet } from 'react-helmet'
 
 const MyBookings = () => {
   const { user } = useAuth()
@@ -58,29 +59,34 @@ const MyBookings = () => {
   }
 
   return (
-    <div className='container p-8 mx-auto'>
-      <h1 className='my-8 text-2xl font-black text-transparent lg:text-5xl bg-clip-text bg-gradient-to-r from-indigo-500 to-teal-500'>
-        Find your list of bookings here
-      </h1>
+    <>
+      <Helmet>
+        <title>My Bookings</title>
+      </Helmet>
+      <div className='container p-8 mx-auto'>
+        <h1 className='my-8 text-2xl font-black text-transparent lg:text-5xl bg-clip-text bg-gradient-to-r from-indigo-500 to-teal-500'>
+          Find your list of bookings here
+        </h1>
 
-      {bookings.length === 0 ? (
-        <p className='py-16 text-3xl font-bold text-center'>
-          No bookings found.
-        </p>
-      ) : (
-        <article className='grid grid-cols-3 gap-8 lg:'>
-          {bookings.map((booking) => {
-            return (
-              <BookingCard
-                key={booking._id}
-                booking={booking}
-                handleDelete={handleDelete}
-              />
-            )
-          })}
-        </article>
-      )}
-    </div>
+        {bookings.length === 0 ? (
+          <p className='py-16 text-3xl font-bold text-center'>
+            No bookings found.
+          </p>
+        ) : (
+          <article className='grid grid-cols-3 gap-8 lg:'>
+            {bookings.map((booking) => {
+              return (
+                <BookingCard
+                  key={booking._id}
+                  booking={booking}
+                  handleDelete={handleDelete}
+                />
+              )
+            })}
+          </article>
+        )}
+      </div>
+    </>
   )
 }
 export default MyBookings

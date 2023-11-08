@@ -6,12 +6,12 @@ import Rooms from '../Pages/Rooms'
 import SingleRoom from '../Pages/SingleRoom'
 import Register from '../Pages/Register'
 import Login from '../Pages/Login'
-import Bookings from '../Pages/Bookings'
 import BookRoom from '../Pages/BookRoom'
 import MyBookings from '../Pages/MyBookings'
 import ErrorPage from '../Pages/ErrorPage'
 import UpdateBooking from '../Pages/UpdateBooking'
 import PrivateRoute from './PrivateRoute'
+import Bookings from '../Pages/Bookings'
 
 const Route = createBrowserRouter([
   {
