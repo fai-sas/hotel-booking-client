@@ -66,7 +66,7 @@ const RoomsCard = ({ rooms }) => {
             </p>
 
             <p className='text-indigo-600 transition duration-500 ease-in-out '>
-              Available : {availability}
+              {availability ? `Available: ${availability}` : 'Not Available'}
             </p>
           </div>
         </div>

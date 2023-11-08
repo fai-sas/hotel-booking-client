@@ -41,7 +41,9 @@ const SingleRoom = () => {
           href='#'
         >
           <div className='flex flex-wrap justify-around gap-4'>
-            <h2>Available: {availability}</h2>
+            <h2>
+              {availability ? `Available: ${availability}` : 'Not Available'}
+            </h2>
             <p>Price: ${price_per_night}</p>
             <p>Size: {room_size}</p>
             <p>Reviews: {reviews?.length || 'No Reviews Yet!'} </p>
@@ -100,17 +102,31 @@ const SingleRoom = () => {
               </div>
 
               {/*  */}
-              <div className='relative inline-flex '>
-                <div className='absolute transition-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt'></div>
-                <Link
-                  to={`/bookRoom/${_id}`}
-                  className='relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900'
-                  role='button'
-                >
-                  Book Now
-                </Link>
-              </div>
-              {/*  */}
+
+              {availability ? (
+                <div className='relative inline-flex '>
+                  <div className='absolute transition-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt'></div>
+                  <Link
+                    to={`/bookRoom/${_id}`}
+                    className='relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900'
+                    role='button'
+                  >
+                    Book Now
+                  </Link>
+                </div>
+              ) : (
+                <div className='relative inline-flex '>
+                  <div className='absolute transition-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt'></div>
+                  <button
+                    to={`/bookRoom/${_id}`}
+                    className='relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900'
+                    role='button'
+                    disabled
+                  >
+                    Not Available
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </article>
@@ -172,8 +188,9 @@ const SingleRoom = () => {
           </div>
         )}
         {/* end of review */}
+        {!user && <h1 className='py-8 text-2xl font-bold'>Login to comment</h1>}
 
-        <CommentBox roomId={_id} />
+        {user && <CommentBox roomId={_id} />}
       </section>
     </>
   )
