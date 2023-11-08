@@ -12,6 +12,7 @@ import ErrorPage from '../Pages/ErrorPage'
 import UpdateBooking from '../Pages/UpdateBooking'
 import PrivateRoute from './PrivateRoute'
 import Bookings from '../Pages/Bookings'
+import Contact from '../Pages/Contact'
 
 const Route = createBrowserRouter([
   {
@@ -75,6 +76,10 @@ const Route = createBrowserRouter([
           fetch(
             `https://hotel-booking-server-rho.vercel.app/api/v1/bookings/${params.id}`
           ),
+      },
+      {
+        path: '/contact',
+        element: <Contact />,
       },
     ],
   },

@@ -105,12 +105,23 @@ const Navbar = () => {
             >
               Rooms
             </NavLink>
+
+            {user && (
+              <NavLink
+                to='userBookings'
+                className='font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500'
+                href='#'
+              >
+                My Bookings
+              </NavLink>
+            )}
+
             <NavLink
-              to='userBookings'
+              to='contact'
               className='font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500'
               href='#'
             >
-              My Bookings
+              Contact Us
             </NavLink>
 
             {user && (
