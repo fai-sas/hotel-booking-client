@@ -39,7 +39,7 @@ const SingleRoom = () => {
           <h2>Available: {availability}</h2>
           <p>Price: ${price_per_night}</p>
           <p>Size: {room_size}</p>
-          {/* <p>Reviews: {reviews ? reviews : 'No Reviews Yet!'}</p> */}
+          <p>Reviews: {reviews?.length || 'No Reviews Yet!'} </p>
           <p>
             Special Offer:{' '}
             {special_offers ? [...special_offers] : 'Check Later for Offers!'}

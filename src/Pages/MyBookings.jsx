@@ -9,44 +9,52 @@ import useAxiosSecure from '../Hooks/useAxiosSecure'
 
 const MyBookings = () => {
   const { user } = useAuth()
-  console.log(user)
   const [bookings, setBookings] = useState([])
   const axiosSecure = useAxiosSecure()
 
   // const url = `http://localhost:5000/api/v1/bookings?email=${user?.email}`
   const url = `/bookings?email=${user?.email}`
 
-  // useEffect(() => {
-  //   axiosSecure.get(url).then((res) => setBookings(res?.data))
-  // }, [url, axiosSecure])
-
   useEffect(() => {
     axiosSecure.get(url).then((res) => setBookings(res.data))
   }, [url, axiosSecure])
 
-  const handleDelete = async (id) => {
-    Swal.fire({
-      title: 'Are you sure?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, Cancel My Booking!',
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          const response = await axiosSecure.delete(`/delete-booking/${id}`)
+  const handleDelete = async (id, bookingDate) => {
+    const oneDayBeforeBookingDate = new Date(bookingDate)
+    oneDayBeforeBookingDate.setDate(oneDayBeforeBookingDate.getDate() - 1)
 
-          if (response.data.deletedCount > 0) {
-            Swal.fire('Your Booking Has Been Cancelled.', 'success')
-            const remaining = bookings.filter((booking) => booking._id !== id)
-            setBookings(remaining)
+    const currentDate = new Date()
+
+    if (currentDate < oneDayBeforeBookingDate) {
+      Swal.fire({
+        title: 'Are you sure?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Cancel My Booking!',
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            const response = await axiosSecure.delete(`/delete-booking/${id}`)
+
+            if (response.data.deletedCount > 0) {
+              Swal.fire('Your Booking Has Been Cancelled.')
+              const remaining = bookings.filter((booking) => booking._id !== id)
+              setBookings(remaining)
+            }
+          } catch (error) {
+            console.error(error)
           }
-        } catch (error) {
-          console.error(error)
         }
-      }
-    })
+      })
+    } else {
+      Swal.fire({
+        icon: 'info',
+        title: 'Cannot Cancel Booking',
+        text: 'You can only cancel a booking at least one day before the booked date.',
+      })
+    }
   }
 
   return (

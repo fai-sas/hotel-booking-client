@@ -11,7 +11,6 @@ import {
 import { createContext, useEffect, useState } from 'react'
 import auth from '../Firebase/firebase.config'
 import axios from 'axios'
-// import useAxiosSecure from '../Hooks/useAxiosSecure'
 
 export const AuthContext = createContext(null)
 
@@ -21,7 +20,6 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
   const [showPassword, setShowPassword] = useState(false)
-  // const axiosSecure = useAxiosSecure()
 
   const handlePassword = () => {
     setShowPassword(!showPassword)
@@ -59,16 +57,10 @@ const AuthProvider = ({ children }) => {
         axios.post('http://localhost:5000/api/v1/jwt', loggedUser, {
           withCredentials: true,
         })
-        // axiosSecure.post('/jwt', loggedUser).then((res) => {
-        //   console.log('token response', res.data)
-        // })
       } else {
         axios.post('http://localhost:5000/api/v1/logout', loggedUser, {
           withCredentials: true,
         })
-        // axiosSecure.post('/logout', loggedUser).then((res) => {
-        //   console.log(res.data)
-        // })
       }
     })
     return () => {
