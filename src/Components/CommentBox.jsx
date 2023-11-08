@@ -2,105 +2,76 @@
 /* eslint-disable no-unused-vars */
 import { toast } from 'react-toastify'
 import useAuth from '../Hooks/useAuth'
+import { useEffect, useState } from 'react'
 
 const CommentBox = ({ roomId }) => {
   console.log(roomId)
   const { user } = useAuth()
+  const [hasBooked, setHasBooked] = useState(false)
 
-  // const handleSubmitComment = (e) => {
-  //   e.preventDefault()
-
-  //   const name = e.target.name.value
-  //   const comment = e.target.comment.value
-
-  //   const review = {
-  //     name,
-  //     comment,
-  //   }
-
-  //   console.log(review)
-
-  //   fetch(
-  //     'https://hotel-booking-server-rho.vercel.app/api/v1/reviews',
-
-  //     {
-  //       method: 'POST',
-  //       headers: {
-  //         'content-type': 'application/json',
-  //       },
-  //       body: JSON.stringify(review),
-  //     }
-  //   )
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data)
-  //       if (data.insertedId) {
-  //         toast.success('Successfully Review Added')
-  //       } else {
-  //         toast.error(data.message)
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       toast.error('Error:', error)
-  //     })
-  // }
-
-  const handleSubmitComment = async (e) => {
-    e.preventDefault()
-
-    const name = e.target.name.value
-    const comment = e.target.comment.value
-
+  useEffect(() => {
     const checkBooking = async () => {
-      // Make an API call to check if the user has a booking for the current room
       try {
         const response = await fetch(
-          `https://hotel-booking-server-rho.vercel.app/api/v1/bookings/check?room_id=${roomId}&user_email=${user?.email}`
+          `https://hotel-booking-server-rho.vercel.app/api/v1/bookings/check?roomId=${roomId}&email=${user?.email}`
         )
 
         if (response.ok) {
           const data = await response.json()
-          return data.hasBooking
+          setHasBooked(data.hasBooking)
         }
       } catch (error) {
         console.error(error)
       }
-      return false
     }
 
-    // Check if the user has a booking for the current room
-    const hasBooking = await checkBooking()
+    if (user) {
+      checkBooking()
+    }
+  }, [roomId, user])
 
-    if (hasBooking) {
-      const review = {
-        name,
-        comment,
-      }
+  const handleSubmitComment = async (e) => {
+    e.preventDefault()
+    const name = e.target.name.value
+    const rating = e.target.rating.value
+    const comment = e.target.comment.value
 
-      console.log(review)
+    const review = {
+      name,
+      rating,
+      comment,
+    }
 
-      fetch('https://hotel-booking-server-rho.vercel.app/api/v1/reviews', {
+    console.log(review)
+
+    if (!hasBooked) {
+      toast.error('You must book this room before posting a review.')
+      return
+    }
+
+    fetch(
+      'https://hotel-booking-server-rho.vercel.app/api/v1/reviews',
+
+      {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
         },
         body: JSON.stringify(review),
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+        if (data.insertedId) {
+          toast.success('Successfully Review Added')
+        } else {
+          toast.error(data.message)
+        }
       })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data)
-          if (data.insertedId) {
-            toast.success('Successfully Review Added')
-          } else {
-            toast.error(data.message)
-          }
-        })
-        .catch((error) => {
-          toast.error('Error:', error)
-        })
-    } else {
-      toast.error('You must book this room before posting a review.')
-    }
+      .catch((error) => {
+        toast.error('Error:', error)
+      })
   }
 
   return (
@@ -118,6 +89,19 @@ const CommentBox = ({ roomId }) => {
               placeholder='Enter your name'
               defaultValue={user?.displayName}
               disabled
+            />
+          </div>
+          <div className='mb-4'>
+            <label className='block mb-2 font-medium text-gray-700'>
+              Rating
+            </label>
+            <input
+              className='w-full px-3 py-2 leading-tight text-gray-700 border rounded appearance-none focus:outline-none focus:border-gray-500'
+              id='rating'
+              name='rating'
+              type='number'
+              placeholder='Enter your rating'
+              defaultValue={5}
             />
           </div>
           <div className='mb-4'>

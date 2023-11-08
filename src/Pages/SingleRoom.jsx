@@ -10,6 +10,7 @@ import { Helmet } from 'react-helmet'
 const SingleRoom = () => {
   const { user } = useAuth()
   const roomData = useLoaderData()
+  const [bookings, setBookings] = useState([])
 
   const {
     name,
@@ -25,6 +26,14 @@ const SingleRoom = () => {
     image3,
     reviews,
   } = roomData
+
+  useEffect(() => {
+    fetch(`https://hotel-booking-server-rho.vercel.app/api/v1/bookings/{_id}`)
+      .then((response) => response.json())
+      .then((data) => setBookings(data))
+  }, [])
+
+  console.log(bookings)
 
   return (
     <>
@@ -163,6 +172,9 @@ const SingleRoom = () => {
                       <div className='mt-1 text-sm text-slate-500'>
                         Rating: {review.rating}
                       </div>
+                      <div className='mt-1 text-sm text-slate-500'>
+                        {review.timestamp}
+                      </div>
                     </div>
                     <div className='overflow-hidden rounded-full bg-slate-50'>
                       <img
@@ -190,7 +202,7 @@ const SingleRoom = () => {
         {/* end of review */}
         {!user && <h1 className='py-8 text-2xl font-bold'>Login to comment</h1>}
 
-        {user && <CommentBox roomId={_id} />}
+        {user && <CommentBox roomId={bookings?._id} />}
       </section>
     </>
   )
