@@ -24,6 +24,14 @@ const UpdateBooking = () => {
     special_offers,
   } = booking
 
+  function getCurrentDate() {
+    const now = new Date()
+    const year = now.getFullYear()
+    const month = (now.getMonth() + 1).toString().padStart(2, '0')
+    const day = now.getDate().toString().padStart(2, '0')
+    return `${year}-${month}-${day}`
+  }
+
   const handleUpdateBooking = async (e) => {
     e.preventDefault()
     const form = e.target
@@ -53,29 +61,6 @@ const UpdateBooking = () => {
       console.error(error)
     }
   }
-
-  // const handleUpdateBooking = (id) => {
-  //   fetch(`http://localhost:5000/api/v1/bookings/${id}`, {
-  //     method: 'PATCH',
-  //     headers: {
-  //       'content-type': 'application/json',
-  //     },
-  //     body: JSON.stringify({ status: 'confirm' }),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data)
-  //       if (data.modifiedCount > 0) {
-  // update state
-  //         Swal.fire({
-  //           title: 'Success!',
-  //           text: 'Booking Updated Successfully',
-  //           icon: 'success',
-  //           confirmButtonText: 'Cool',
-  //         })
-  //       }
-  //     })
-  // }
 
   return (
     <>
@@ -140,6 +125,7 @@ const UpdateBooking = () => {
                   name='date'
                   id='date'
                   defaultValue={date}
+                  min={getCurrentDate()}
                   required
                   className='block w-full px-5 py-3 my-2 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg text-neutral-600 bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300'
                 />

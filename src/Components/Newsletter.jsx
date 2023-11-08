@@ -7,7 +7,12 @@ const Newsletter = () => {
   }
 
   return (
-    <div className='relative my-16 bg-violet-600'>
+    <div
+      data-aos='fade-down'
+      data-aos-easing='ease-out-cubic'
+      data-aos-duration='2000'
+      className='relative my-16 bg-violet-600'
+    >
       <div className='absolute inset-x-0 bottom-0'>
         <svg
           viewBox='0 0 224 12'

@@ -21,7 +21,7 @@ const CommentBox = ({ roomId }) => {
   //   console.log(review)
 
   //   fetch(
-  //     'http://localhost:5000/api/v1/reviews',
+  //     'https://hotel-booking-server-rho.vercel.app/api/v1/reviews',
 
   //     {
   //       method: 'POST',
@@ -55,7 +55,7 @@ const CommentBox = ({ roomId }) => {
       // Make an API call to check if the user has a booking for the current room
       try {
         const response = await fetch(
-          `http://localhost:5000/api/v1/bookings/check?room_id=${roomId}&user_email=${user?.email}`
+          `https://hotel-booking-server-rho.vercel.app/api/v1/bookings/check?room_id=${roomId}&user_email=${user?.email}`
         )
 
         if (response.ok) {
@@ -79,7 +79,7 @@ const CommentBox = ({ roomId }) => {
 
       console.log(review)
 
-      fetch('http://localhost:5000/api/v1/reviews', {
+      fetch('https://hotel-booking-server-rho.vercel.app/api/v1/reviews', {
         method: 'POST',
         headers: {
           'content-type': 'application/json',

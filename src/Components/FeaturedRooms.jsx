@@ -16,7 +16,11 @@ const FeaturedRooms = () => {
   }
 
   return (
-    <>
+    <section
+      data-aos='zoom-out-up'
+      data-aos-easing='ease-out-cubic'
+      data-aos-duration='2000'
+    >
       <div className='px-6 my-10 space-y-4 md:px-0'>
         <h2 className='text-2xl font-bold text-center text-gray-800 dark:text-white md:text-4xl'>
           Our Featured Rooms
@@ -55,7 +59,7 @@ const FeaturedRooms = () => {
           )
         })}
       </div>
-    </>
+    </section>
   )
 }
 export default FeaturedRooms

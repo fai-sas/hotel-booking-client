@@ -57,7 +57,7 @@ const BookRoom = () => {
     console.log(booking)
 
     fetch(
-      'http://localhost:5000/api/v1/bookings',
+      'https://hotel-booking-server-rho.vercel.app/api/v1/bookings',
 
       {
         method: 'POST',
@@ -68,7 +68,7 @@ const BookRoom = () => {
       }
     )
       // axios
-      //   .post('http://localhost:5000/api/v1/bookings, bookings')
+      //   .post('https://hotel-booking-server-rho.vercel.app/api/v1/bookings, bookings')
       .then((res) => res.json())
       .then((data) => {
         console.log(data)

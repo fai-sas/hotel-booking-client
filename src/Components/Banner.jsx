@@ -16,10 +16,20 @@ const Banner = () => {
         ></video>
       </div>
       <div className='z-10 space-y-2 video-content'>
-        <h1 className='pb-8 font-light lg:text-6xl'>
+        <h1
+          data-aos='zoom-in'
+          data-aos-easing='ease-out-cubic'
+          data-aos-duration='1000'
+          className='pb-8 font-light lg:text-6xl'
+        >
           Your Dream Getaway Awaits
         </h1>
-        <h1 className='pb-4 font-light leading-normal lg:text-4xl'>
+        <h1
+          data-aos='fade-down-left'
+          data-aos-easing='ease-out-cubic'
+          data-aos-duration='1000'
+          className='pb-4 font-light leading-normal lg:text-4xl'
+        >
           Discover and Reserve the Perfect Hotel <br />
           for Your Next Adventure
         </h1>

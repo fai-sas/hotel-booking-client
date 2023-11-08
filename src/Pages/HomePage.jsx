@@ -8,7 +8,7 @@ import Testimonial from '../Components/Testimonial'
 
 const HomePage = () => {
   return (
-    <>
+    <div className='overflow-hidden'>
       <Helmet>
         <title>Welcome to Hotel Booking Page</title>
       </Helmet>
@@ -18,7 +18,7 @@ const HomePage = () => {
       <Testimonial />
       <Map />
       <Newsletter />
-    </>
+    </div>
   )
 }
 export default HomePage

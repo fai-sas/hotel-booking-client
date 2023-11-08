@@ -1,6 +1,12 @@
 const Map = () => {
   return (
-    <section className='bg-gray-100'>
+    <section
+      data-aos='fade-up'
+      data-aos-easing='ease-out-cubic'
+      data-aos-anchor-placement='center-bottom'
+      data-aos-duration='2000'
+      className='bg-gray-100'
+    >
       <div className='px-4 py-16 mx-auto max-w-7xl sm:px-6 lg:py-20 lg:px-8'>
         <div className='max-w-2xl mx-auto text-center lg:max-w-4xl'>
           <h2 className='text-3xl font-extrabold text-gray-900'>

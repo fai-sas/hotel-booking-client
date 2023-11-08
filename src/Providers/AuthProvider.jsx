@@ -54,13 +54,21 @@ const AuthProvider = ({ children }) => {
       setLoading(false)
       // if user exists then issue a token
       if (currentUser) {
-        axios.post('http://localhost:5000/api/v1/jwt', loggedUser, {
-          withCredentials: true,
-        })
+        axios.post(
+          'https://hotel-booking-server-rho.vercel.app/api/v1/jwt',
+          loggedUser,
+          {
+            withCredentials: true,
+          }
+        )
       } else {
-        axios.post('http://localhost:5000/api/v1/logout', loggedUser, {
-          withCredentials: true,
-        })
+        axios.post(
+          'https://hotel-booking-server-rho.vercel.app/api/v1/logout',
+          loggedUser,
+          {
+            withCredentials: true,
+          }
+        )
       }
     })
     return () => {
