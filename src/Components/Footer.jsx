@@ -23,7 +23,7 @@ const Footer = () => {
               <div className='col-span-8 border-r border-gray-100 dark:border-gray-800 md:col-span-2 lg:col-span-3'>
                 <div className='flex items-center justify-between gap-6 py-6 border-b border-white dark:border-gray-800 md:block md:space-y-6 md:border-none md:py-0'>
                   <img
-                    src='images/logo.svg'
+                    src='https://i.ibb.co/pyFDBGL/Hoteller2.png'
                     alt='logo '
                     width='100'
                     height='42'

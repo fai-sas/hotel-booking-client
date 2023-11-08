@@ -9,6 +9,12 @@ body {
   font-family: 'Nunito', sans-serif;
 }
 
+.active {
+  text-decoration: underline;
+  font-weight: bold;
+  color: dodgerblue;
+}
+
 .video-docker video {
   top: 50%;
   left: 50%;

@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import Route from './Router/Route'
 import AuthProvider from './providers/AuthProvider'
+import('preline')
 
 const client = new QueryClient()
 
