@@ -92,6 +92,20 @@ const Footer = () => {
                       </h6>
                     </Link>
                   </div>
+                  <div>
+                    <Link to='/contact'>
+                      <h6 className='text-lg font-medium text-gray-800 dark:text-gray-200'>
+                        Contact Us
+                      </h6>
+                    </Link>
+                  </div>
+                  <div>
+                    <Link to='/pricing'>
+                      <h6 className='text-lg font-medium text-gray-800 dark:text-gray-200'>
+                        Pricing
+                      </h6>
+                    </Link>
+                  </div>
                 </div>
                 <div className='flex justify-between py-4 pb-8 border-t border-gray-100 dark:border-gray-800 md:pl-16'>
                   <span>All right reserved</span>

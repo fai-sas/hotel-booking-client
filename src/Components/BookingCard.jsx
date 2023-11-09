@@ -44,14 +44,14 @@ const BookingCard = ({ booking, handleDelete }) => {
           </Link>
           <Link
             to={`/updateBooking/${_id}`}
-            className='absolute bottom-0 left-0 z-10 items-center hidden px-6 py-2 m-2 text-xs text-white transition duration-500 ease-in-out bg-indigo-600 hover:bg-white hover:text-indigo-600 sm:flex'
+            className='absolute bottom-0 left-0 z-10 items-center px-6 py-2 m-2 text-xs text-white transition duration-500 ease-in-out bg-indigo-600 hover:bg-white hover:text-indigo-600 sm:flex'
           >
             <span className='text-lg'>|</span>&nbsp;&nbsp;<span>Update</span>
           </Link>
 
           <button
             onClick={() => handleDelete(_id, date)}
-            className='absolute bottom-0 right-0 z-10 items-center hidden px-6 py-2 m-2 text-xs text-white transition duration-500 ease-in-out bg-indigo-600 hover:bg-white hover:text-indigo-600 sm:flex'
+            className='absolute bottom-0 right-0 z-10 items-center px-6 py-2 m-2 text-xs text-white transition duration-500 ease-in-out bg-indigo-600 hover:bg-white hover:text-indigo-600 sm:flex'
           >
             <span className='text-lg'>|</span>&nbsp;&nbsp;<span>Cancel</span>
           </button>

@@ -73,7 +73,7 @@ const MyBookings = () => {
             No bookings found.
           </p>
         ) : (
-          <article className='grid grid-cols-3 gap-8 lg:'>
+          <article className='grid grid-cols-1 gap-8 lg:grid-cols-3 '>
             {bookings.map((booking) => {
               return (
                 <BookingCard

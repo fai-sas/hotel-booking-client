@@ -10,7 +10,16 @@ import { Helmet } from 'react-helmet'
 const SingleRoom = () => {
   const { user } = useAuth()
   const roomData = useLoaderData()
-  const [bookings, setBookings] = useState([])
+  const [userReviews, setUserReviews] = useState([])
+  const [showReviews, setShowReviews] = useState(false)
+
+  useEffect(() => {
+    fetch('https://hotel-booking-server-rho.vercel.app/api/v1/reviews')
+      .then((response) => response.json())
+      .then((data) => setUserReviews(data))
+  }, [])
+
+  console.log(userReviews)
 
   const {
     name,
@@ -24,16 +33,7 @@ const SingleRoom = () => {
     image1,
     image2,
     image3,
-    reviews,
   } = roomData
-
-  useEffect(() => {
-    fetch(`https://hotel-booking-server-rho.vercel.app/api/v1/bookings/{_id}`)
-      .then((response) => response.json())
-      .then((data) => setBookings(data))
-  }, [])
-
-  console.log(bookings)
 
   return (
     <>
@@ -55,7 +55,7 @@ const SingleRoom = () => {
             </h2>
             <p>Price: ${price_per_night}</p>
             <p>Size: {room_size}</p>
-            <p>Reviews: {reviews?.length || 'No Reviews Yet!'} </p>
+            <p>Reviews: {userReviews?.length || 'No Reviews Yet!'} </p>
             <p>
               Special Offer:{' '}
               {special_offers ? [...special_offers] : 'Check Later for Offers!'}
@@ -146,9 +146,9 @@ const SingleRoom = () => {
           What our customers are saying:
         </h1>
 
-        {reviews?.length > 0 ? (
+        {userReviews?.length > 0 ? (
           <div className='grid grid-cols-1 gap-8 lg:grid-cols-2'>
-            {reviews.map((review, index) => (
+            {userReviews.map((review, index) => (
               <div key={index} className='review'>
                 <figure className='relative p-6 bg-white shadow-xl rounded-2xl shadow-slate-900/10'>
                   <svg
@@ -167,7 +167,7 @@ const SingleRoom = () => {
                   <figcaption className='relative flex items-center justify-between pt-6 mt-6 border-t border-slate-100'>
                     <div>
                       <div className='text-base font-display text-slate-900'>
-                        {review.username}
+                        {review.name}
                       </div>
                       <div className='mt-1 text-sm text-slate-500'>
                         Rating: {review.rating}
@@ -179,7 +179,7 @@ const SingleRoom = () => {
                     <div className='overflow-hidden rounded-full bg-slate-50'>
                       <img
                         alt=''
-                        src={user?.photoURL}
+                        src={user?.profilePicture}
                         // src='https://i.pravatar.cc/300'
                         className='object-cover h-14 w-14'
                         loading='lazy'
@@ -200,9 +200,10 @@ const SingleRoom = () => {
           </div>
         )}
         {/* end of review */}
+
         {!user && <h1 className='py-8 text-2xl font-bold'>Login to comment</h1>}
 
-        {user && <CommentBox roomId={bookings?._id} />}
+        {user && <CommentBox roomId={_id} />}
       </section>
     </>
   )

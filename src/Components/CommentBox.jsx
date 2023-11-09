@@ -3,32 +3,10 @@
 import { toast } from 'react-toastify'
 import useAuth from '../Hooks/useAuth'
 import { useEffect, useState } from 'react'
+import axios from 'axios'
 
-const CommentBox = ({ roomId }) => {
-  console.log(roomId)
+const CommentBox = (props) => {
   const { user } = useAuth()
-  const [hasBooked, setHasBooked] = useState(false)
-
-  useEffect(() => {
-    const checkBooking = async () => {
-      try {
-        const response = await fetch(
-          `https://hotel-booking-server-rho.vercel.app/api/v1/bookings/check?roomId=${roomId}&email=${user?.email}`
-        )
-
-        if (response.ok) {
-          const data = await response.json()
-          setHasBooked(data.hasBooking)
-        }
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-    if (user) {
-      checkBooking()
-    }
-  }, [roomId, user])
 
   const handleSubmitComment = async (e) => {
     e.preventDefault()
@@ -36,17 +14,17 @@ const CommentBox = ({ roomId }) => {
     const rating = e.target.rating.value
     const comment = e.target.comment.value
 
+    const currentDate = new Date()
+    const formattedDate = currentDate.toISOString().split('T')[0]
+
     const review = {
       name,
       rating,
       comment,
-    }
-
-    console.log(review)
-
-    if (!hasBooked) {
-      toast.error('You must book this room before posting a review.')
-      return
+      email: user?.email,
+      room_id: props.roomId,
+      timestamp: formattedDate,
+      profilePicture: user?.photoURL,
     }
 
     fetch(
@@ -58,19 +36,20 @@ const CommentBox = ({ roomId }) => {
           'content-type': 'application/json',
         },
         body: JSON.stringify(review),
+        credentials: 'include',
       }
     )
       .then((res) => res.json())
       .then((data) => {
         console.log(data)
         if (data.insertedId) {
-          toast.success('Successfully Review Added')
+          toast.success('Successfully Reviewed')
         } else {
           toast.error(data.message)
         }
       })
       .catch((error) => {
-        toast.error('Error:', error)
+        toast.error('Error during review:', error)
       })
   }
 

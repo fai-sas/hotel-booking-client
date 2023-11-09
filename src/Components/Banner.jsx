@@ -16,23 +16,19 @@ const Banner = () => {
         ></video>
       </div>
       <div className='z-10 space-y-2 video-content'>
-        <h1
+        <div
           data-aos='zoom-in'
           data-aos-easing='ease-out-cubic'
           data-aos-duration='1000'
-          className='pb-8 font-light lg:text-6xl'
         >
-          Your Dream Getaway Awaits
-        </h1>
-        <h1
-          data-aos='fade-down-left'
-          data-aos-easing='ease-out-cubic'
-          data-aos-duration='1000'
-          className='pb-4 font-light leading-normal lg:text-4xl'
-        >
-          Discover and Reserve the Perfect Hotel <br />
-          for Your Next Adventure
-        </h1>
+          <h1 className='pb-8 text-3xl font-bold lg:text-6xl'>
+            Your Dream Getaway Awaits
+          </h1>
+          <h1 className='pb-4 font-light leading-normal lg:text-4xl'>
+            Discover and Reserve the Perfect Hotel <br />
+            for Your Next Adventure
+          </h1>
+        </div>
         <Link to='/rooms'>
           <button className='self-center px-4 py-2 m-2 text-2xl text-center text-white bg-indigo-500 rounded-tl-full rounded-br-full text-md'>
             Book Now
