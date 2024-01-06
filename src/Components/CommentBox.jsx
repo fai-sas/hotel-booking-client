@@ -4,9 +4,11 @@ import { toast } from 'react-toastify'
 import useAuth from '../Hooks/useAuth'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import useGetReviews from '../Hooks/useGetReviews'
 
 const CommentBox = (props) => {
   const { user } = useAuth()
+  const { data, isLoading, isFetching, refetch } = useGetReviews()
 
   const handleSubmitComment = async (e) => {
     e.preventDefault()
@@ -43,6 +45,7 @@ const CommentBox = (props) => {
       .then((data) => {
         console.log(data)
         if (data.insertedId) {
+          refetch()
           toast.success('Successfully Reviewed')
         } else {
           toast.error(data.message)

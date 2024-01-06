@@ -6,20 +6,21 @@ import Swal from 'sweetalert2'
 import useAuth from '../Hooks/useAuth'
 import CommentBox from '../Components/CommentBox'
 import { Helmet } from 'react-helmet'
+import useGetReviews from '../Hooks/useGetReviews'
+import moment from 'moment'
 
 const SingleRoom = () => {
-  const { user } = useAuth()
-  const roomData = useLoaderData()
-  const [userReviews, setUserReviews] = useState([])
-  const [showReviews, setShowReviews] = useState(false)
-
   useEffect(() => {
-    fetch('https://hotel-booking-server-rho.vercel.app/api/v1/reviews')
-      .then((response) => response.json())
-      .then((data) => setUserReviews(data))
+    window.scrollTo(0, 0)
   }, [])
 
-  console.log(userReviews)
+  const { user } = useAuth()
+  const roomData = useLoaderData()
+
+  const { data } = useGetReviews()
+
+  const singleRoomReview =
+    data && data.filter((review) => review.room_id === roomData._id)
 
   const {
     name,
@@ -55,7 +56,7 @@ const SingleRoom = () => {
             </h2>
             <p>Price: ${price_per_night}</p>
             <p>Size: {room_size}</p>
-            <p>Reviews: {userReviews?.length || 'No Reviews Yet!'} </p>
+            <p>Reviews: {singleRoomReview?.length || 'No Reviews Yet!'} </p>
             <p>
               Special Offer:{' '}
               {special_offers ? [...special_offers] : 'Check Later for Offers!'}
@@ -146,9 +147,9 @@ const SingleRoom = () => {
           What our customers are saying:
         </h1>
 
-        {userReviews?.length > 0 ? (
+        {singleRoomReview?.length > 0 ? (
           <div className='grid grid-cols-1 gap-8 lg:grid-cols-2'>
-            {userReviews.map((review, index) => (
+            {singleRoomReview.map((review, index) => (
               <div key={index} className='review'>
                 <figure className='relative p-6 bg-white shadow-xl rounded-2xl shadow-slate-900/10'>
                   <svg
@@ -173,7 +174,7 @@ const SingleRoom = () => {
                         Rating: {review.rating}
                       </div>
                       <div className='mt-1 text-sm text-slate-500'>
-                        {review.timestamp}
+                        {moment(review.timestamp).format('DD MMMM YYYY')}
                       </div>
                     </div>
                     <div className='overflow-hidden rounded-full bg-slate-50'>
